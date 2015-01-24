@@ -1,0 +1,21 @@
+info:
+  groupId: @groupId@
+  artifactId: @artifactId@
+  version: @version@
+
+server:
+  port: 8081
+management:
+  context-path: /admin
+
+spring:
+  application:
+    name: ${info.artifactId}
+  boot:
+    admin:
+      url: http://localhost:8080  
+      client:
+        url: http://localhost:${server.port}${management.context-path}
+  jackson:
+    serialization:
+      INDENT_OUTPUT: true

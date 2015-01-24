@@ -1,0 +1,40 @@
+<table class="table table-striped">
+	<col style="width: 30%">
+	<col style="width: auto">
+	<thead>
+		<tr>
+			<th>Property</th>
+			<th>Value <small class="pull-right"><a
+					href="{{ application.url }}/configprops">raw JSON</a></small></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr class="highlight"
+			ng-repeat-start="(propkey, propvalue) in configprops">
+			<td colspan="2">{{ propkey }}</td>
+		</tr>
+		<tr ng-repeat-end ng-repeat="(key, value) in propvalue.properties">
+			<td style="word-break: break-all;">{{ propvalue.prefix }}.{{ key }}</td>
+			<td style="word-break: break-all;" ng-switch on="typeOf(value)">
+					<table class="table table-striped" ng-switch-when="object">
+						<col style="width: 30%">
+						<col style="width: auto">
+						<thead>
+							<tr>
+								<th>Property</th>
+								<th>Value</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat-end ng-repeat="(k, v) in value">
+								<td style="word-break: break-all;">{{ k }}</td>
+								<td style="word-break: break-all;">{{ v }}</td>
+							</tr>
+						</tbody>
+					</table>
+					<span ng-switch-default>{{value}}</span>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
